@@ -1,1 +1,38 @@
 ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: result
+  labels:
+    app: result
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: result
+  template:
+    metadata:
+      labels:
+        app: result
+    spec:
+      containers:
+      - name: result
+        image:  epitechcontent/t-dop-600-result:k8s
+        ports:
+        - containerPort: 8080
+        env:
+        - name: POSTGRES_USER
+          valueFrom: 
+            secretKeyRef:
+              name: postgress-secret
+              key: postgres-root-username
+        - name: POSTGRES_PASSWORD
+          valueFrom: 
+            secretKeyRef:
+              name: postgress-secret
+              key: postgres-root-password
+        - name: POSTGRES_DB
+          valueFrom: 
+            configMapKeyRef:
+              name: postgres-configmap
+              key: database_url

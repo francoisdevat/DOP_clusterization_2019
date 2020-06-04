@@ -27,7 +27,7 @@ spec:
           value: 
         - name: POSTGRES_DB
           value:
-        - name: POSTGRES_USER
+        - name: POSTGRES_USER 
           valueFrom: 
             secretKeyRef:
               name: postgress-secret

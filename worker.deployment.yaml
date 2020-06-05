@@ -1,1 +1,43 @@
 ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker-deployment
+  namespace: default
+  labels:
+    app: worker
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: worker
+  template:
+    metadata:
+      labels:
+        app: worker
+    spec:
+      containers:
+      - name: worker
+        image: epitechcontent/t-dop-600-worker:k8s
+        ports:
+        - containerPort: 5432
+        env:
+        - name: REDIS_HOST
+          value:
+        - name: POSTGRES_HOST
+          value:
+        - name: POSTGRES_PORT
+          value: 
+        - name: POSTGRES_DB
+          value:
+        - name: POSTGRES_USER 
+          valueFrom: 
+            secretKeyRef:
+              name: postgress-secret
+              key: postgres-root-username
+        - name: POSTGRES_PASSWORD
+          valueFrom: 
+            secretKeyRef:
+              name: postgress-secret
+              key: postgres-root-password
+      restartPolicy: always

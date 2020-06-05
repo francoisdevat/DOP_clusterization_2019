@@ -1,1 +1,13 @@
 ---
+apiVersion: apps/v1
+kind: Ingress
+metadata:
+  name: poll-ingress
+spec: 
+  rules:
+  - host: poll.dop.io
+  http:
+    paths:
+    - backend:
+        serviceName: poll-internal-service
+        servicePort: 8080

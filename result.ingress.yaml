@@ -1,1 +1,13 @@
 ---
+apiVersion: apps/v1
+kind: Ingress
+metadata:
+  name: result-ingress
+spec: 
+  rules:
+  - host: result.dop.io
+  http:
+    paths:
+    - backend:
+        serviceName: result-internal-service
+        servicePort: 8080

@@ -3,6 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgres-deployment
+  namespace: default
   labels:
     app: postgres
 spec:
@@ -37,3 +38,4 @@ spec:
             secretKeyRef:
               name: postgress-secret
               key: postgres-root-password
+      restartPolicy: always

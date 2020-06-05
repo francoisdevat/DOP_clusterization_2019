@@ -38,4 +38,4 @@ spec:
             secretKeyRef:
               name: postgress-secret
               key: postgres-root-password
-      restartPolicy: always
+      restartPolicy: Always

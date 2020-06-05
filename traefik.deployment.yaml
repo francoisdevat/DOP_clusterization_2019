@@ -21,4 +21,4 @@ spec:
         image: traefik:1.7
         ports:
         - containerPort: 8080
-      restartPolicy: always
+      restartPolicy: Always

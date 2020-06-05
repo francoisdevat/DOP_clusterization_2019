@@ -37,4 +37,4 @@ spec:
             configMapKeyRef:
               name: postgres-configmap
               key: database_url
-      restartPolicy: always
+      restartPolicy: Always

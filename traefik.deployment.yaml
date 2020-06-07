@@ -16,6 +16,16 @@ spec:
       labels:
         app: traefik
     spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - store
+            topologyKey: "kubernetes.io/hostname"
       containers:
       - name: traefik
         image: traefik:1.7

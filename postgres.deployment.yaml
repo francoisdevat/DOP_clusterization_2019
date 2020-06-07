@@ -16,26 +16,28 @@ spec:
       labels:
         app: postgres
     spec:
+      volumes:
+        - name: postgres-pv-storage
+          persistentVolumeClaim:
+            claimName: postgres-pv-claim
       containers:
       - name: postgres
         image: postgres:12
-        ports:
-        - containerPort: 5432
         env:
+        - name: POSTGRES_PORT
+          value: "5432"
         - name: POSTGRES_HOST
           value:
-        - name: POSTGRES_PORT
-          value: 
         - name: POSTGRES_DB
           value:
         - name: POSTGRES_USER 
           valueFrom: 
             secretKeyRef:
               name: postgress-secret
-              key: postgres-root-username
+              key: POSTGRES_USER
         - name: POSTGRES_PASSWORD
           valueFrom: 
             secretKeyRef:
               name: postgress-secret
-              key: postgres-root-password
+              key: POSTGRES_PASSWORD
       restartPolicy: Always
